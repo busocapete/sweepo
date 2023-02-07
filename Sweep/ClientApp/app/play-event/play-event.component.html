@@ -1,0 +1,68 @@
+<div *ngIf="event">
+    <div class="card">
+        <nav class="navbar navbar-expand navbar-dark bg-success justify-content-end card-nav">
+            <p class="navbar-brand" href="#">Play Event  {{event.event.date | date:short}}</p>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a routerLink="/scorecard/{{event.playerCard.id}}" class="nav-link"><i class="fas fa-id-card x3"></i></a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/event/leaderboard/{{event.event.id}}"><i class="fas fa-trophy"></i> Leaderboard</a>
+                    </li>
+                    <!--<li class="nav-item">
+        <a routerLink="/event/play/{{event.id}}" *ngIf="userHasJoined(event)" class="nav-link" value="Play">Play</a>
+
+    </li>
+    <li class="nav-item">
+        <button *ngIf="!userHasJoined(event)" (click)="enterEvent(event)" class="btn btn-sm btn-success float-right" value="Join">Join</button>
+
+    </li>-->
+                </ul>
+            </div>
+        </nav>
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+            <div>
+                <h6>Your Group</h6>
+            </div>
+            <ul *ngIf="event.groupPlayers">
+                <li *ngFor="let player of event.groupPlayers">{{player.fullName}} ({{player.currentHandicap}})</li>
+            </ul>
+
+
+
+
+        </div>
+
+        <div class="card-footer">
+            <a routerLink="/scorecard/enter/{{event.markerCard.id}}" class="btn-danger btn-sm float-right btn-card-footer"><i class="fas fa-id-card"></i>Mark {{event.markerCard.player.fullName }}'s card</a>
+
+        </div>
+    </div>
+</div>
+
+
+<button class="btn btn-danger" (click)="goBack()"><i class="fas fa-chevron-left"></i></button>
+
+
+<!--<h5>{{event.event.date | date:short}}</h5>
+<h6>Your Group</h6>
+<ul *ngIf="event.groupPlayers">
+    <li *ngFor="let player of event.groupPlayers">{{player.fullName}} ({{player.currentHandicap}})</li>
+</ul>
+<p>Mark {{event.markerCard.player.fullName }}'s card</p>
+<a routerLink="/scorecard/enter/{{event.markerCard.id}}" class="btn btn-success">Mark Card</a>
+
+
+
+
+
+
+
+<button class="btn btn-danger" (click)="goBack()">go back</button>-->

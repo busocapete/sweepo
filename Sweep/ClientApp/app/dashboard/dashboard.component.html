@@ -1,0 +1,53 @@
+<!--<h3>Next Events</h3>
+<div class="grid grid-pad">
+    <a *ngFor="let event of events" class="col-1-4"
+       routerLink="/eventDetail/{{event.id}}">
+        <div class="module hero">
+            <h4>{{event.date}}</h4>
+        </div>
+    </a>
+</div>-->
+
+
+
+<div *ngIf="sweeps">
+    <div class="card" *ngFor="let sweep of sweeps">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <p class="navbar-brand" href="#">{{sweep.name}}</p>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/sweep/details/{{sweep.id}}">{{sweep.totalEvents}} Events</a>
+
+                    </li>
+                    <!--<li class="nav-item" *ngIf="userHasJoined(event)">
+
+                        <a *ngIf="!event.notDrawn" routerLink="/event/play/{{event.id}}" class="nav-link" value="Play">Play</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <button *ngIf="!userHasJoined(event)" (click)="enterEvent(event)" class="btn btn-sm btn-success float-right" value="Join">Join</button>
+
+                    </li>-->
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+            <div style="text-align:center">
+                <h6>
+                    Owner: {{sweep.owner}}
+                </h6>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@*@model  IEnumerable<IGrouping<Player, OOMPoints>>*@
+@model  IEnumerable<GolfSweep.Dtos.LeaderboardDto>
+
+@{
+    ViewData["Title"] = "OOM";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>OOM</h1>
+
+
+@foreach (var player in Model)
+{
+    <h4>@player.FullName</h4>
+    <p>@player.Position</p>
+    <p>@player.TotalPoints</p>
+    <hr />
+}
+
+@*@foreach (var group in Model)
+{
+    <h4>Group @group.Key</h4>
+
+    @foreach (var player in group)
+    {
+        <p>@player.Player.FullName</p>
+        <p>@player.Points</p>
+        <p>@player.Position</p>
+
+        <p>@player.Card.TotalPoints</p>
+    }
+}*@

@@ -1,0 +1,38 @@
+﻿@model GolfSweep.ViewModels.EventDrawViewModel
+@*@model GolfSweep.Data.Event*@
+
+@{
+    ViewData["Title"] = "Draw";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Draw</h1>
+<form asp-action="CreateDraw" asp-controller="Events">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <input type="submit" value="Create Draw" class="btn btn-danger" />
+    </div>
+</form>
+
+
+
+<div class="row">
+
+
+    @foreach (var group in Model.GroupedEntries)
+    {
+        <div class="col-sm-3">
+            <h4>Group @group.Key</h4>
+
+            @foreach (var player in group)
+            {
+                <h5>@player.ScoreCard.Player.FullName</h5>
+                @if (player.Marker != null)
+                {
+                    <p>To Mark: @player.Marker.Player.FullName</p>
+                }
+            }
+        </div>
+    }
+</div>

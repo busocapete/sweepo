@@ -1,0 +1,25 @@
+<div *ngIf="event">
+    <div class="card">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <a class="navbar-brand" href="#">Virtual Match Play</a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto"></ul>
+            </div>
+        </nav>
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+            <ul>
+                <li *ngFor="let result of event.results">
+                    <p *ngIf="result.won"><span class="text-success"><i class="fas fa-check"></i></span> You beat {{result.playerName}} <strong><span class="text-success">{{result.matchResult}}&amp;{{ 18 - result.hole}}</span></strong></p>
+                    <p *ngIf="!result.won && !result.halved"><span class="text-danger"><i class="far fa-window-close"></i></span> You lost to {{result.playerName}} <span class="text-danger"><strong>{{result.matchResult}}&amp;{{18 - result.hole }}</strong></span></p>
+                    <p *ngIf="result.halved">You halved your match with {{result.playerName}}</p>
+                </li>
+            </ul>
+            
+        </div>
+    </div>
+</div>

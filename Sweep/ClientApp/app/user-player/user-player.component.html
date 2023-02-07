@@ -1,0 +1,66 @@
+<div *ngIf="player">
+    <div class="card">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <a class="navbar-brand" href="#">{{player.fullName}}</a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto"></ul>
+            </div>
+        </nav>
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+            <div style="text-align:center">
+                <p>Current Handicap: <strong>{{player.currentHandicap}}</strong></p>
+                <p>Exact Handicap: <strong>{{player.currentExactHandicap}}</strong> </p>
+            </div>
+
+            <div style="text-align:center">
+                <ul>
+                    <li *ngFor="let handicap of player.handicaps">{{handicap.exact}} - {{handicap.created | date:short }}</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="card" *ngFor="let event of player.events">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <a class="navbar-brand" href="#">{{event.date | date: short}}</a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/event/results/{{event.id}}"><i class="fas fa-list"></i> Results</a>
+                    </li>
+                    <li *ngIf="event.points && event.points.card" class="nav-item">
+                        <a class="nav-link" routerLink="/scorecard/{{event.points.card.id}}"><i class="fas fa-id-card"></i> Card</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </nav>
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            <h5>{{event.course.name}}</h5>
+            <div *ngIf="event.points">
+                <h5 *ngIf="event.points.position">Position: {{event.points.position}}</h5>
+                <h5 *ngIf="event.points.points">OOM Points: {{event.points.points}}</h5>
+                <div *ngIf="event.points.card">
+                    <h5>Gross {{event.points.card.outGross}} + {{event.points.card.inGross}} = {{event.points.card.totalGross}}</h5>
+                    <h5>Nett {{event.points.card.outNett}} + {{event.points.card.inNett}} = {{event.points.card.totalNett}}</h5>
+                    <h5>Points {{event.points.card.outPoints}} + {{event.points.card.inPoints}} = {{event.points.card.totalPoints}}</h5>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<button class="btn btn-danger" (click)="goBack()"><i class="fas fa-chevron-left"></i></button>

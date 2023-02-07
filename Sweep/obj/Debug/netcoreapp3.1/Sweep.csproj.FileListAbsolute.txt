@@ -1,0 +1,7 @@
+C:\Users\PETETOSH\source\repos\Sweep\Sweep\obj\Debug\netcoreapp3.1\Sweep.csprojAssemblyReference.cache
+C:\Users\PETETOSH\source\repos\Sweep\Sweep\obj\Debug\netcoreapp3.1\Sweep.AssemblyInfoInputs.cache
+C:\Users\PETETOSH\source\repos\Sweep\Sweep\obj\Debug\netcoreapp3.1\Sweep.AssemblyInfo.cs
+C:\Users\PETETOSH\source\repos\Sweep\Sweep\obj\Debug\netcoreapp3.1\GolfSweep.TagHelpers.input.cache
+C:\Users\PETETOSH\source\repos\Sweep\Sweep\obj\Debug\netcoreapp3.1\GolfSweep.TagHelpers.output.cache
+C:\Users\PETETOSH\source\repos\Sweep\Sweep\obj\Debug\netcoreapp3.1\Sweep.csproj.CoreCompileInputs.cache
+C:\Users\PETETOSH\source\repos\Sweep\Sweep\obj\Debug\netcoreapp3.1\GolfSweep.MvcApplicationPartsAssemblyInfo.cache

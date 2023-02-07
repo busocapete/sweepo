@@ -1,0 +1,142 @@
+﻿@model GolfSweep.Data.ScoreCard
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ScoreCard</h4>
+    <hr />
+    <dl class="row">
+        @*<dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.First)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.First)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Second)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Second)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Third)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Third)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fourth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fourth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fifth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fifth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sixth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sixth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Seventh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Seventh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Eighth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Eighth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Ninth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Ninth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tenth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tenth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Eleventh)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Eleventh)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Twelwth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Twelwth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Thirteenth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Thirteenth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fourteenth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fourteenth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fifteenth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fifteenth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Sixteenth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Sixteenth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Seventeenth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Seventeenth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Eithteenth)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Eithteenth)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Player)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Player.Id)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Created)
+        </dd>*@
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

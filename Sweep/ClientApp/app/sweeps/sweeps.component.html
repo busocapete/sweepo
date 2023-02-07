@@ -1,0 +1,114 @@
+<!--<div *ngIf="sweeps">
+    <a href="/Sweeps/Details/{{sweep.id}}" *ngFor="let sweep of sweeps">{{sweep.name}}</a>
+</div>-->
+
+<nav class="navbar sticky-top navbar-expand navbar-dark bg-danger justify-content-end card-nav">
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#createSweepModal">
+                    <i class="fas fa-plus"></i> Sweep
+                </a>
+
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+
+<div *ngIf="sweeps">
+    <div class="card" *ngFor="let sweep of sweeps">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <p class="navbar-brand" href="#">
+                {{sweep.name}}
+                <span *ngIf="!isUserOwner(sweep) &&sweep.userIsMember && sweep.approved" class="badge badge-success">Member</span>
+                <span *ngIf="isUserOwner(sweep)" class="badge badge-success">Owner</span>
+            </p>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" *ngIf="sweep.userIsMember && sweep.approved">
+                        <a class="nav-link" routerLink="/sweep/details/{{sweep.id}}">{{sweep.totalEvents}} Events</a>
+
+                    </li>
+
+                    <!--<li class="nav-item">
+
+                        <a *ngIf="!event.notDrawn" routerLink="/event/play/{{event.id}}" class="nav-link" value="Play">Play</a>
+
+                    </li>-->
+                    <li class="nav-item" *ngIf="!sweep.userIsMember">
+                        <button (click)="joinSweep(sweep)" class="btn btn-sm btn-success float-right" value="Join">Join</button>
+
+                    </li>
+                    <li class="nav-item" *ngIf="sweep.userIsMember">
+                        <p *ngIf="!sweep.approved" class="nav-link"><span class="badge badge-danger">Pending</span></p>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+            <div style="text-align:center">
+                <h6>
+                    Owner: {{sweep.owner}}
+                </h6>
+
+                <h6 *ngIf="isUserOwner(sweep)">You are the owner</h6>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade modal-mini" id="createSweepModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header justify-content-center">
+                Create New Sweep
+            </div>
+            <div class="modal-body">
+                <div>
+                    <form [formGroup]="createSweepForm" (ngSubmit)="createSweep()" novalidate>
+
+                        <div class="form-group">
+                            <div class="input-group wd-sm-400 wd-lg-600">
+                                <input type="text" formControlName="name" class="form-control" placeholder="Enter Sweep Name" autofocus>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="input-group wd-sm-400 wd-lg-600">
+                                <label class="form-control-label">Public</label>
+                                <input type="checkbox" formControlName="public" class="form-control">
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="justify-content-center">
+                                <button type="submit" class="btn btn-success">Create Sweep</button>
+                            </div>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!--<button type="button" class="btn btn-link btn-neutral">Back</button>
+                <button type="button" class="btn btn-link btn-neutral" data-dismiss="modal">Close</button>-->
+            </div>
+        </div>
+    </div>
+</div>

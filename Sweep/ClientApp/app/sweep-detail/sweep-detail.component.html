@@ -1,0 +1,343 @@
+<div *ngIf="sweep">
+
+
+    <nav class="navbar sticky-top navbar-expand navbar-dark bg-danger justify-content-end card-nav">
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a *ngIf="isUserOwner(sweep)" class="nav-link" data-toggle="modal" data-target="#createEventModal">
+                        <i class="fas fa-plus"></i> Event
+                    </a>
+
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="displayOOM()"><i class="fas fa-list"></i> OOM</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" (click)="displayMembers()"><i class="fas fa-list"></i> Members</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" (click)="displayEvents()"><i class="fas fa-list"></i> Events</a>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+    <div *ngIf="showOOM">
+        <div class="card">
+            <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+                <p class="navbar-brand">{{sweep.name}} Order of Merit</p>
+
+                <div class="navbar-collapse collapse">
+                    <!--<ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/event/detail/{{event.id}}"><i class="fa fa-users"></i> {{event.playerNames.length}}</a>
+
+                        </li>
+                        <li class="nav-item" *ngIf="userHasJoined(event)">
+
+                            <a *ngIf="!event.notDrawn" routerLink="/event/play/{{event.id}}" class="nav-link" value="Play">Play</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <button *ngIf="!userHasJoined(event)" (click)="enterEvent(event)" class="btn btn-sm btn-success float-right" value="Join">Join</button>
+
+                        </li>
+
+
+                    </ul>-->
+                </div>
+            </nav>
+
+
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Player</th>
+                            <th>Played</th>
+                            <th>Points</th>
+                    </thead>
+                    <tbody *ngFor="let player of sweep.oom">
+                        <tr>
+                            <th>{{player.position}}</th>
+                            <th><a data-toggle="collapse" class="text-black" href="#showResults-{{player.id}}" role="button">{{player.fullName}}</a></th>
+                            <th>{{player.played}}</th>
+                            <th>{{player.totalPoints}}</th>
+
+                        </tr>
+                        <tr *ngFor="let result of player.events" class="collapse" id="showResults-{{player.id}}">
+                            <td>{{result.position}}</td>
+                            <td>{{result.event.date | date:short }}</td>
+                            <td></td>
+                            <td>{{result.points}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showMembers">
+        <div class="card" *ngIf="isUserOwner(sweep) && sweep.requests.length > 0">
+            <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+                <p class="navbar-brand">{{sweep.name}} Requests</p>
+
+                <div class="navbar-collapse collapse">
+                </div>
+            </nav>
+
+
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+
+                <table class="table" *ngIf="isUserOwner(sweep)">
+                    <thead>
+                        <tr>
+                            <th>Player</th>
+                            <th>Handicap</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let player of sweep.requests">
+                            <td>{{player.fullName}}</td>
+                            <td>{{player.currentHandicap}}</td>
+                            <td><a class="btn btn-sm btn-success" (click)="approveRequest(player)">Approve</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+
+
+
+        <div class="card">
+            <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+                <p class="navbar-brand">{{sweep.name}} Members</p>
+
+                <div class="navbar-collapse collapse">
+                </div>
+            </nav>
+
+
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Playing</th>
+                            <th>Exact</th>
+                            <th *ngIf="isUserOwner(sweep)"></th>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let player of sweep.members">
+                            <td>{{player.fullName}}</td>
+                            <td>{{player.currentHandicap}}</td>
+                            <th>{{player.currentExactHandicap}}</th>
+                            <th *ngIf="isUserOwner(sweep)"><button class="btn btn-sm btn-info" (click)="getSelectedPlayer(player)" data-toggle="modal" data-target="#updateHandicapModal"><i class="fas fa-pen"></i> Hcap</button></th>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="showEvents">
+        <div class="card" *ngFor="let event of sweep.events">
+            <nav *ngIf="!event.complete" class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+                <!--<a class="nav-item btn btn-danger" routerLink="/event/detail/{{event.id}}" *ngIf="isUserOwner(sweep)">
+                    Manage
+                </a>-->
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/event/detail/{{event.id}}"><i class="fa fa-users"></i> {{event.playerNames.length}}</a>
+
+                        </li>
+                        <li class="nav-item" *ngIf="userHasJoined(event)">
+
+                            <a *ngIf="event.drawn" routerLink="/event/play/{{event.id}}" class="nav-link" value="Play">Play</a>
+                            <p class="nav-link" *ngIf="!event.drawn">
+                                <span class="badge badge-danger">
+                                    Pending Draw
+                                </span>
+                            </p>
+                        </li>
+                        <li class="nav-item">
+                            <button *ngIf="!userHasJoined(event)" (click)="enterEvent(event)" class="btn btn-sm btn-success float-right" value="Join">Join</button>
+
+                        </li>
+
+
+                    </ul>
+                </div>
+            </nav>
+
+
+            <nav *ngIf="event.complete" class="navbar navbar-expand navbar-dark bg-danger justify-content-end card-nav">
+                <a class="navbar-brand" href="#"><i class="fas fa-home"></i></a>
+                <div class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" routerLink="/event/detail/{{event.id}}"><i class="fa fa-users"></i> {{event.playerNames.length}}</a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a routerLink="/event/results/{{event.id}}" class="nav-link" value="Play">Results</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+
+                <div style="text-align:center">
+                    <h6>
+                        {{sweep.name}}
+                    </h6>
+                    <h5>{{event.date | date:short }}</h5>
+                    <h6>Course: {{event.course.name}}</h6>
+                    <p *ngIf="event.winterHandicaps">Winter Handicaps: {{event.winterHandicaps}}</p>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div *ngIf="selectedPlayer" class="modal fade modal-mini" id="updateHandicapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    Update {{selectedPlayer.fullName}}'s Handicap
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form [formGroup]="updateHandicapForm" (ngSubmit)="updatePlayerHandicap(selectedPlayer)" novalidate>
+
+                            <div class="form-group">
+                                <div class="input-group wd-sm-400 wd-lg-600">
+                                    <input type="number" formControlName="handicap" class="form-control" placeholder="Enter New Handicap" autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="justify-content-center">
+                                    <button type="submit" class="btn btn-success">Update Handicap</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-link btn-neutral">Back</button>
+                    <button type="button" class="btn btn-link btn-neutral" data-dismiss="modal">Close</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngIf="isUserOwner(sweep)" class="modal fade modal-mini" id="createEventModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    Create Event
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <form [formGroup]="createEventForm" (ngSubmit)="createEvent()" novalidate>
+
+                            <div class="form-group">
+                                <div class="input-group wd-sm-400 wd-lg-600">
+                                    <input type="date" formControlName="date" class="form-control" value="MM/DD/YY" placeholder="Enter New Handicap" autofocus>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="input-group wd-sm-400 wd-lg-600">
+                                    <select formControlName="courseId" class="form-control">
+                                        <option *ngFor="let course of sweep.courses" value="{{course.id}}">
+                                            {{course.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="input-group wd-sm-400 wd-lg-600">
+                                    <label class="form-control-label">Winter Handicaps</label>
+                                    <input type="checkbox" formControlName="winterHandicaps" class="form-control" >
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="justify-content-center">
+                                    <button type="submit" class="btn btn-success">Create Event</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-link btn-neutral">Back</button>
+                    <button type="button" class="btn btn-link btn-neutral" data-dismiss="modal">Close</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

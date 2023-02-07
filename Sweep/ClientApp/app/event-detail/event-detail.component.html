@@ -1,0 +1,170 @@
+<div *ngIf="event">
+
+    <nav *ngIf="isUserOwner(event)" class="navbar sticky-top navbar-expand navbar-dark bg-danger justify-content-end card-nav">
+        <a class="navbar-brand" href="#">Manage</a>
+        <div class="navbar-collapse collapse">
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#addPlayersModal"><i class="fas fa-user-plus"></i></a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" (click)="createDraw(event)">Create Draw</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" (click)="closeEvent(event)">Close Event</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="card" *ngIf="event.groupedEntries">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <a class="navbar-brand" href="#">{{event.date | date: long}} | Groups</a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto"></ul>
+            </div>
+        </nav>
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+            <div style="text-align:center">
+                <div *ngFor="let group of event.groupedEntries; let i = index">
+                    <h5>Group {{i+1}}</h5>
+                    <ul *ngFor="let entry of group">
+                        <li>
+                            <h6>{{entry.scoreCard.player.fullName}}</h6>
+                            <p>to mark: {{entry.marker.player.fullName}}'s card</p>
+                            <a *ngIf="isUserOwner(event)" routerLink="/scorecard/enter/{{entry.scoreCard.id}}">Mark Card</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" *ngIf="!event.groupedEntries">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <a class="navbar-brand" href="#">{{event.date | date: long}} | Players</a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <!--<li class="nav-item">
+                        <a class="nav-link" routerLink="/event/detail/{{event.id}}"><i class="fa fa-users"></i> {{event.playerNames.length}}</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a routerLink="/event/play/{{event.id}}" *ngIf="userHasJoined(event)" class="nav-link" value="Play">Play</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <button *ngIf="!userHasJoined(event)" (click)="enterEvent(event)" class="btn btn-sm btn-success float-right" value="Join">Join</button>
+
+                    </li>-->
+                </ul>
+            </div>
+        </nav>
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+            <!--<div style="text-align:center">
+                <ul *ngFor="let player of event.playerNames">
+                    <li>
+                        <p>{{player.name}}<span><button class="btn btn-sm btn-danger" (click)="removePlayerFromEvent(player.id)"><i class="fas fa-remove"></i></button></span></p>
+                    </li>
+                </ul>
+            </div>-->
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th *ngIf="isUserOwner(event)"></th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr *ngFor="let player of event.playerNames">
+                        <th>{{player.name}}</th>
+                        <td *ngIf="isUserOwner(event)"><button class="btn btn-sm btn-danger" (click)="removePlayerFromEvent(player.id)"><i class="fas fa-times"></i></button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<button class="btn btn-danger" (click)="goBack()"><i class="fas fa-chevron-left"></i></button>
+
+
+
+<div *ngIf="event">
+    <div *ngIf="event.sweepMembers" class="modal fade" id="addPlayersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </button>
+                    <h4 class="title title-up">Add Players</h4>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Player</th>
+                                    <th></th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let player of event.sweepMembers">
+                                    <th *ngIf="!playerHasEntered(player)">{{player.fullName}}</th>
+                                    <td *ngIf="!playerHasEntered(player)"><button class="btn btn-sm btn-success" (click)="addPlayerToEvent(player.id)"><i class="fas fa-plus"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <!--<form [formGroup]="updateScoreForm" (ngSubmit)="updateScore(selectedScore)" novalidate>
+
+                <div class="form-group">
+                    <div class="input-group wd-sm-400 wd-lg-600">
+                        <input type="number" formControlName="gross" class="form-control" placeholder="Add Gross Score for Hole {{selectedScore.holeNumber}}" autofocus>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="justify-content-center">
+                        <button type="submit" class="btn btn-success">Update Score</button>
+                    </div>
+                </div>
+            </form>-->
+
+
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-link btn-neutral">Back</button>
+        <button type="button" class="btn btn-link btn-neutral" data-dismiss="modal">Close</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

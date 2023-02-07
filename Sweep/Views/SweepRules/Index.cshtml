@@ -1,0 +1,72 @@
+﻿@model IEnumerable<GolfSweep.Data.SweepRules>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CutHandicaps)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WinnerCut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SecondCut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThirdCut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinPointsForCut)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderOfMerit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OOMEntriesScale)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CutHandicaps)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WinnerCut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SecondCut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThirdCut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinPointsForCut)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderOfMerit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OOMEntriesScale)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

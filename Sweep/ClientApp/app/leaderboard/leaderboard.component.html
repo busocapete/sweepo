@@ -1,0 +1,63 @@
+<div class="row" *ngIf="leaderboard">
+    <button class="btn btn-danger" (click)="goBack()"><i class="fas fa-chevron-left"></i></button>
+
+    <div class="card">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <a class="navbar-brand" href="#">Leaderboard</a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+
+                    </li>
+
+
+                </ul>
+            </div>
+        </nav>
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th>
+                            Player
+                        </th>
+                        <th>
+                            Hole
+                        </th>
+                        <th>
+                            TotalPoints
+                        </th>
+                        <!--<th>
+
+                        </th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of leaderboard">
+                        <td><strong>{{item.fullName}}</strong></td>
+                        <td>{{item.currentHole}}</td>
+                        <td>{{item.totalPoints}}</td>
+
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+
+
+
+
+
+        </div>
+    </div>
+    <button class="btn btn-danger" (click)="goBack()"><i class="fas fa-chevron-left"></i></button>
+
+</div>
+

@@ -1,0 +1,173 @@
+<div class="row" *ngIf="scoreCard">
+    <button class="btn btn-danger" (click)="goBack()"><i class="fas fa-chevron-left"></i></button>
+
+    <div class="card">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <a class="navbar-brand" href="#">{{scoreCard.player.fullName}} ({{scoreCard.player.currentHandicap}})</a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <!--<a class="nav-link" routerLink="/event/detail/{{event.id}}"><i class="fa fa-users"></i> {{event.playerNames.length}}</a>-->
+
+
+                    </li>
+
+                    <!--<li class="nav-item">
+                        <a routerLink="/event/play/{{event.id}}" *ngIf="userHasJoined(event)" class="nav-link" value="Play">Play</a>
+
+                    </li>-->
+                    <li class="nav-item">
+                        <p class="nav-link">Handicap: {{scoreCard.player.currentHandicap}}</p>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            <p>Course: {{scoreCard.courseName}}</p>
+
+
+            <table class="table table-responsive d-sm-none">
+                <thead>
+                    <tr>
+                        <th>
+                            Hole
+                        </th>
+                        <th>
+                            Gross
+                        </th>
+                        <th>
+                            Points
+                        </th>
+                        <!--<th>
+
+                        </th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let score of scoreCard.scores">
+                        <td><strong>{{score.holeNumber}}</strong></td>
+                        <td *ngIf="score.gross < score.par"><p class="badge badge-success">{{score.gross}}</p></td>
+                        <td *ngIf="score.gross == score.par"><p class="badge badge-info">{{score.gross}}</p></td>
+                        <td *ngIf="score.gross > score.par"><p class="badge badge-danger">{{score.gross}}</p></td>
+
+                        <td *ngIf="score.nett < score.par"><p class="badge badge-success">{{score.points}}</p></td>
+                        <td *ngIf="score.nett == score.par"><p class="badge badge-info">{{score.points}}</p></td>
+                        <td *ngIf="score.nett > score.par"><p class="badge badge-danger">{{score.points}}</p></td>
+
+                        <!--<td>
+                            <a href="" class="btn btn-sm btn-success mb-10" (click)="getSelectedScore(score)"
+                               data-toggle="modal" data-target="#enterScoreModal">{{score.holeNumber}}<i class="fas fa-plus"></i></a>
+                        </td>-->
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+
+
+
+
+
+            <table class="table table-responsive d-none d-sm-block">
+                <thead>
+                    <tr>
+                        <th>
+                            Hole
+                        </th>
+                        <th>
+                            Par
+                        </th>
+                        <th>
+                            SI
+                        </th>
+                        <th>
+                            Gross
+                        </th>
+                        <th>
+                            Nett
+                        </th>
+                        <th>
+                            Points
+                        </th>
+                        <!--<th>
+
+                        </th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let score of scoreCard.scores">
+                        <td><strong>{{score.holeNumber}}</strong></td>
+                        <td>{{score.par}}</td>
+                        <td>{{score.index}}</td>
+                        <td *ngIf="score.gross < score.par"><p class="badge badge-success">{{score.gross}}</p></td>
+                        <td *ngIf="score.gross == score.par"><p class="badge badge-info">{{score.gross}}</p></td>
+                        <td *ngIf="score.gross > score.par"><p class="badge badge-danger">{{score.gross}}</p></td>
+
+                        <td *ngIf="score.nett < score.par"><p class="badge badge-success">{{score.nett}}</p></td>
+                        <td *ngIf="score.nett == score.par"><p class="badge badge-info">{{score.nett}}</p></td>
+                        <td *ngIf="score.nett > score.par"><p class="badge badge-danger">{{score.nett}}</p></td>
+
+                        <td *ngIf="score.nett < score.par"><p class="badge badge-success">{{score.points}}</p></td>
+                        <td *ngIf="score.nett == score.par"><p class="badge badge-info">{{score.points}}</p></td>
+                        <td *ngIf="score.nett > score.par"><p class="badge badge-danger">{{score.points}}</p></td>
+
+                        <!--<td>
+                            <a href="" class="btn btn-sm btn-success mb-10" (click)="getSelectedScore(score)"
+                               data-toggle="modal" data-target="#enterScoreModal">{{score.holeNumber}}<i class="fas fa-plus"></i></a>
+                        </td>-->
+
+                    </tr>
+                </tbody>
+
+            </table>
+
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+    <button class="btn btn-danger" (click)="goBack()"><i class="fas fa-chevron-left"></i></button>
+
+</div>
+
+
+
+
+
+<!--<div *ngIf="scoreCard">
+    <p>{{scoreCard.player.fullName}}'s Card</p>
+    <p>Current Playing Handicap {{scoreCard.player.currentHandicap}}</p>
+    <p>Course: {{scoreCard.courseName}}</p>
+    <div class="row">
+        <div class="col-2">Hole</div>
+        <div class="col-2">Par</div>
+        <div class="col-2">SI</div>
+        <div class="col-2">Gross</div>
+        <div class="col-2">Nett</div>
+        <div class="col-2">Points</div>
+    </div>
+    <div class="row" *ngFor="let hole of scoreCard.scores">
+        <div class="col-2">{{hole.holeNumber}}</div>
+        <div class="col-2">{{hole.par}}</div>
+        <div class="col-2">{{hole.index}}</div>
+        <div class="col-2">{{hole.gross}}</div>
+        <div class="col-2">{{hole.nett}}</div>
+        <div class="col-2">{{hole.points}}</div>
+    </div>
+</div>
+
+<br />
+<br />
+
+<button class="btn btn-danger" (click)="goBack()">go back</button>-->

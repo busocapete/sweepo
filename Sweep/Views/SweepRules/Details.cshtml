@@ -1,0 +1,61 @@
+﻿@model GolfSweep.Data.SweepRules
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>SweepRules</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CutHandicaps)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CutHandicaps)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.WinnerCut)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.WinnerCut)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SecondCut)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SecondCut)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ThirdCut)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ThirdCut)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MinPointsForCut)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MinPointsForCut)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OrderOfMerit)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OrderOfMerit)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OOMEntriesScale)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OOMEntriesScale)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

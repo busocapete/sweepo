@@ -1,0 +1,492 @@
+
+<button class="btn btn-danger" (click)="goBack()"><i class="fas fa-chevron-left"></i></button>
+
+<div *ngIf="event">
+    <div class="card" *ngIf="showOOM">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <p class="navbar-brand" href="#">ORDER OF MERIT {{event.date | date:short}}</p>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="displayCards()"><i class="fas fa-id-card"></i> CARDS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/event/virtual-matches/{{event.id}}"><i class="fas fa-users"></i> Matches</a>
+                    </li>
+                    <!--<li class="nav-item">
+                        <a class="nav-link" (click)="displayHandicaps()"><i class="fas fa-wheelchair"></i></a>
+
+                    </li>-->
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+
+            <table class="table table-responsive d-sm-none">
+                <thead>
+
+                    <tr>
+                        <th>Player</th>
+                        <th>Hcap</th>
+                        <th>Pts</th>
+                        <th>OOM</th>
+                        <th></th>
+                    </tr>
+                    <tr></tr>
+
+                </thead>
+                <tbody *ngFor="let entry of event.oomPoints">
+
+                        <tr>
+
+                            <td>
+                                <h6>{{entry.card.player.fullName}}</h6>
+                            </td>
+                            <td>
+                                {{entry.card.player.currentHandicap}}
+                            </td>
+                            <td>
+                                {{entry.card.totalPoints}}
+                            </td>
+                            <th>
+                                {{entry.points}}
+                            </th>
+                            <th>
+                                <a class="btn btn-sm btn-info" data-toggle="collapse" href="#showDetail-{{entry.card.id}}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fas fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+
+                    <tr class="collapse" id="showDetail-{{entry.card.id}}">
+                        <td></td>
+                        <td><strong>In:</strong> {{entry.card.inPoints}}</td>
+                        <td><strong>Out:</strong> {{entry.card.outPoints}}</td>
+                        <td><strong>L6:</strong> {{entry.card.lastSixPoints}}</td>
+                        <td><strong>L3:</strong> {{entry.card.lastThreePoints}}</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <table class="table table-responsive d-none d-sm-block">
+                <thead>
+
+                    <tr>
+                        <th>Player</th>
+                        <th>Hcap</th>
+                        <th>Pts</th>
+                        <th>In</th>
+                        <th>Out</th>
+                        <th>6</th>
+                        <th>3</th>
+                        <th>OOM</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr *ngFor="let entry of event.oomPoints">
+                        <td>
+                            {{entry.card.player.fullName}}
+                        </td>
+                        <td>
+                            {{entry.card.player.currentHandicap}}
+                        </td>
+                        <td>
+                            {{entry.card.totalPoints}}
+                        </td>
+                        <td>
+                            {{entry.card.inPoints}}
+                        </td>
+                        <td>
+                            {{entry.card.outPoints}}
+                        </td>
+                        <td>
+                            {{entry.card.lastSixPoints}}
+                        </td>
+                        <td>
+                            {{entry.card.lastThreePoints}}
+                        </td>
+                        <th>
+                            {{entry.points}}
+                        </th>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="card" *ngIf="showCards">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <p class="navbar-brand" href="#">CARDS {{event.date | date:short}}</p>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="displayOOM()"><i class="fas fa-trophy"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="displayHandicaps()"><i class="fas fa-wheelchair"></i></a>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+            <div *ngFor="let card of event.cards">
+                <div class="row">
+
+                    <h6 class="col-6"><a class="tx-black" data-toggle="collapse" href="#showScores-{{card.id}}" role="button">{{card.player.fullName}}</a></h6>
+                    <div class="col-4">
+                        Gross <br />
+                        Nett <br />
+                        Points
+                    </div>
+                    <div class="col-2">
+                        <strong>{{card.totalGross}}</strong> <br />
+                        <strong>{{card.totalNett}}</strong> <br />
+                        <strong>{{card.totalPoints}}</strong>
+                    </div>
+                    <!--<div class="col-2">
+                        <a class="btn btn-sm btn-info" data-toggle="collapse" href="#showScores-{{card.id}}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fas fa-chevron-down"></i></a>
+
+                    </div>-->
+                </div>
+
+                <div class="collapse" id="showScores-{{card.id}}">
+
+                    <hr />
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="d-none d-sm-block" style="text-align:center"></th>
+                                <th style="text-align:center">1</th>
+                                <th style="text-align:center">2</th>
+                                <th style="text-align:center">3</th>
+                                <th style="text-align:center">4</th>
+                                <th style="text-align:center">5</th>
+                                <th style="text-align:center">6</th>
+                                <th style="text-align:center">7</th>
+                                <th style="text-align:center">8</th>
+                                <th style="text-align:center">9</th>
+                                <th style="text-align:center"></th>
+                                <th style="text-align:center">Total</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="d-none d-sm-block">Gross</td>
+                                <td *ngFor="let score of card.frontNine">
+                                    <span *ngIf="score.gross < score.par" class="badge badge-success">{{score.gross}}</span>
+                                    <span *ngIf="score.gross == score.par" class="badge badge-info">{{score.gross}}</span>
+                                    <span *ngIf="score.gross > score.par" class="badge badge-danger">{{score.gross}}</span>
+
+                                </td>
+                                <td>
+                                   
+                                </td>
+                                <td>
+                                    <strong>{{card.outGross}}</strong>                                
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="d-none d-sm-block">Nett</td>
+                                <td *ngFor="let score of card.frontNine">
+                                    <span *ngIf="score.nett < score.par" class="badge badge-success">{{score.nett}}</span>
+                                    <span *ngIf="score.nett == score.par" class="badge badge-info">{{score.nett}}</span>
+                                    <span *ngIf="score.nett > score.par" class="badge badge-danger">{{score.nett}}</span>
+
+                                </td>
+                                <td></td>
+                                <td><strong>{{card.outNett}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="d-none d-sm-block">Points</td>
+                                <td *ngFor="let score of card.frontNine">
+                                    <span *ngIf="score.nett < score.par" class="badge badge-success">{{score.points}}</span>
+                                    <span *ngIf="score.nett == score.par" class="badge badge-info">{{score.points}}</span>
+                                    <span *ngIf="score.nett > score.par" class="badge badge-danger">{{score.points}}</span>
+
+                                </td>
+                                <td></td>
+                                <td><strong>{{card.outPoints}}</strong></td>
+
+                            </tr>
+                            <tr>
+                                <th class="d-none d-sm-block" style="text-align:center"></th>
+                                <th style="text-align:center">10</th>
+                                <th style="text-align:center">11</th>
+                                <th style="text-align:center">12</th>
+                                <th style="text-align:center">13</th>
+                                <th style="text-align:center">14</th>
+                                <th style="text-align:center">15</th>
+                                <th style="text-align:center">16</th>
+                                <th style="text-align:center">17</th>
+                                <th style="text-align:center">18</th>
+                                <th style="text-align:center"></th>
+                            </tr>
+                            <tr>
+                                <td class="d-none d-sm-block">Gross</td>
+                                <td *ngFor="let score of card.backNine">
+                                    <span *ngIf="score.gross < score.par" class="badge badge-success">{{score.gross}}</span>
+                                    <span *ngIf="score.gross == score.par" class="badge badge-info">{{score.gross}}</span>
+                                    <span *ngIf="score.gross > score.par" class="badge badge-danger">{{score.gross}}</span>
+
+                                </td>
+                                <td></td>
+                                <td><strong>{{card.inGross}}</strong></td>
+
+                            </tr>
+
+                            <tr>
+                                <td class="d-none d-sm-block">Nett</td>
+                                <td *ngFor="let score of card.backNine">
+                                    <span *ngIf="score.nett < score.par" class="badge badge-success">{{score.nett}}</span>
+                                    <span *ngIf="score.nett == score.par" class="badge badge-info">{{score.nett}}</span>
+                                    <span *ngIf="score.nett > score.par" class="badge badge-danger">{{score.nett}}</span>
+
+                                </td>
+                                <td></td>
+                                <td><strong>{{card.outNett}}</strong></td>
+
+                            </tr>
+                            <tr>
+                                <td class="d-none d-sm-block">Points</td>
+                                <td *ngFor="let score of card.backNine">
+                                    <span *ngIf="score.nett < score.par" class="badge badge-success">{{score.points}}</span>
+                                    <span *ngIf="score.nett == score.par" class="badge badge-info">{{score.points}}</span>
+                                    <span *ngIf="score.nett > score.par" class="badge badge-danger">{{score.points}}</span>
+
+                                </td>
+                                <td></td>
+                                <td><strong>{{card.inPoints}}</strong></td>
+
+                            </tr>
+
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                    <!--<h6>Gross</h6>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <span *ngFor="let score of card.frontNine">
+                                <span *ngIf="score.gross < score.par" class="badge badge-success">{{score.gross}}</span>
+                                <span *ngIf="score.gross == score.par" class="badge badge-info">{{score.gross}}</span>
+                                <span *ngIf="score.gross > score.par" class="badge badge-danger">{{score.gross}}</span>
+                            </span>
+                            <span class="badge badge-success">{{card.outGross}}</span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span *ngFor="let score of card.backNine">
+                                <span *ngIf="score.gross < score.par" class="badge badge-success">{{score.gross}}</span>
+                                <span *ngIf="score.gross == score.par" class="badge badge-info">{{score.gross}}</span>
+                                <span *ngIf="score.gross > score.par" class="badge badge-danger">{{score.gross}}</span>
+                            </span>
+                            <span class="badge badge-success">{{card.inGross}}</span>
+                        </div>
+                    </div>
+
+                    <h6>Nett</h6>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <span *ngFor="let score of card.frontNine">
+                                <span *ngIf="score.nett < score.par" class="badge badge-success">{{score.nett}}</span>
+                                <span *ngIf="score.nett == score.par" class="badge badge-info">{{score.nett}}</span>
+                                <span *ngIf="score.nett > score.par" class="badge badge-danger">{{score.nett}}</span>
+                            </span>
+                            <span class="badge badge-success">{{card.outNett}}</span>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <span *ngFor="let score of card.backNine">
+                                <span *ngIf="score.nett < score.par" class="badge badge-success">{{score.nett}}</span>
+                                <span *ngIf="score.nett == score.par" class="badge badge-info">{{score.nett}}</span>
+                                <span *ngIf="score.nett > score.par" class="badge badge-danger">{{score.nett}}</span>
+                            </span>
+                            <span class="badge badge-success">{{card.inNett}}</span>
+                        </div>
+                    </div>
+
+
+                <h6>Points</h6>
+
+                <div class="row">
+                    <div class="col-12">
+                        <span *ngFor="let score of card.frontNine">
+                            <span *ngIf="score.nett < score.par" class="badge badge-success">{{score.points}}</span>
+                            <span *ngIf="score.nett == score.par" class="badge badge-info">{{score.points}}</span>
+                            <span *ngIf="score.nett > score.par" class="badge badge-danger">{{score.points}}</span>
+                        </span>
+                        <span class="badge badge-success">{{card.outPoints}}</span>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <span *ngFor="let score of card.backNine">
+                            <span *ngIf="score.nett < score.par" class="badge badge-success">{{score.points}}</span>
+                            <span *ngIf="score.nett == score.par" class="badge badge-info">{{score.points}}</span>
+                            <span *ngIf="score.nett > score.par" class="badge badge-danger">{{score.points}}</span>
+                        </span>
+                        <span class="badge badge-success">{{card.inPoints}}</span>
+                    </div>
+                </div>-->
+            </div>
+                <hr />
+
+
+
+        </div>
+
+        </div>
+    </div>
+
+
+    <div class="card" *ngIf="showHandicapChanges">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <p class="navbar-brand" href="#">Handicaps {{event.date | date:short}}</p>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="displayOOM()"><i class="fas fa-trophy"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" (click)="displayCards()"><i class="fas fa-id-card"></i></a>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+
+            <table class="table table-responsive d-sm-none">
+                <thead>
+
+                    <tr>
+                        <th>Player</th>
+                        <th>Hcap</th>
+                        <th>Pts</th>
+                        <th>OOM</th>
+                        <th></th>
+                    </tr>
+                    <tr></tr>
+
+                </thead>
+                <tbody *ngFor="let entry of event.oomPoints">
+                    <tr>
+                        <td>
+                            {{entry.card.player.fullName}}
+                        </td>
+                        <td>
+                            {{entry.card.player.currentHandicap}}
+                        </td>
+                        <td>
+                            {{entry.card.totalPoints}}
+                        </td>
+                        <th>
+                            {{entry.points}}
+                        </th>
+                        <th>
+                            <a class="btn btn-sm btn-info" data-toggle="collapse" href="#showDetail-{{entry.card.id}}" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fas fa-chevron-down"></i></a>
+                        </th>
+
+                    </tr>
+                    <tr class="collapse" id="showDetail-{{entry.card.id}}">
+                        <td></td>
+                        <td><strong>In:</strong> {{entry.card.inPoints}}</td>
+                        <td><strong>Out:</strong> {{entry.card.outPoints}}</td>
+                        <td><strong>L6:</strong> {{entry.card.lastSixPoints}}</td>
+                        <td><strong>L3:</strong> {{entry.card.lastThreePoints}}</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+            <table class="table table-responsive d-none d-sm-block">
+                <thead>
+
+                    <tr>
+                        <th>Player</th>
+                        <th>Hcap</th>
+                        <th>Pts</th>
+                        <th>In</th>
+                        <th>Out</th>
+                        <th>6</th>
+                        <th>3</th>
+                        <th>OOM</th>
+                    </tr>
+
+                </thead>
+                <tbody>
+                    <tr *ngFor="let entry of event.oomPoints">
+                        <td>
+                            {{entry.card.player.fullName}}
+                        </td>
+                        <td>
+                            {{entry.card.player.currentHandicap}}
+                        </td>
+                        <td>
+                            {{entry.card.totalPoints}}
+                        </td>
+                        <td>
+                            {{entry.card.inPoints}}
+                        </td>
+                        <td>
+                            {{entry.card.outPoints}}
+                        </td>
+                        <td>
+                            {{entry.card.lastSixPoints}}
+                        </td>
+                        <td>
+                            {{entry.card.lastThreePoints}}
+                        </td>
+                        <th>
+                            {{entry.points}}
+                        </th>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+
+        </div>
+    </div>
+
+</div>

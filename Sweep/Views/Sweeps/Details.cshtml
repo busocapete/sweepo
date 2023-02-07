@@ -1,0 +1,81 @@
+﻿@model GolfSweep.Data.Sweep
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a> |
+    <a href="~/Sweeps/@Model.Id/Events/Create">Add Event</a> |
+    <a href="/Sweeps/@Model.Id/OOMPoints/Create">Add OOM Points</a> |
+    <a href="/Sweeps/@Model.Id/Rules/Create">Add Rules</a>
+</div>
+
+
+<div>
+    <h4>Sweep</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Owner.FirstName) @Html.DisplayFor(model => model.Owner.LastName)
+        </dd>
+    </dl>
+</div>
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Sweep
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Entries
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var e in Model.Events)
+            {
+                <tr>
+                    <td>@Model.Name</td>
+                    <td>@e.Date</td>
+                    <td><a href="~/Sweeps/@Model.Id/Event/@e.Id/Entries">@e.Entries.Count()</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a> |
+    <a href="~/Sweeps/@Model.Id/Events/Create">Add Event</a> |
+    <a href="/Sweeps/@Model.Id/OOMPoints/Create">Add OOM Points</a>
+    <a href="/Sweeps/@Model.Id/Rules/Create">Add Rules</a>
+
+</div>

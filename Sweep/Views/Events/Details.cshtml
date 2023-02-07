@@ -1,0 +1,356 @@
+﻿@model GolfSweep.Data.Event
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Event</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Course)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Course.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WinterHandicaps)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WinterHandicaps)
+        </dd>
+
+    </dl>
+
+    <a class="btn btn-lg btn-info" href="~/Events/@Model.Id/Draw">Create Draw</a>
+
+    <form asp-action="CloseEvent" asp-controller="Events">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group">
+            <input type="submit" value="Close Event / Calculate Scores / Create OOM / Change Handicaps" class="btn btn-danger" />
+        </div>
+    </form>
+</div>
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Player</th>
+                <th>Score</th>
+                <th>
+                    1
+                </th>
+                <th>
+                    2
+                </th>
+                <th>
+                    3
+                </th>
+                <th>
+                    4
+                </th>
+                <th>
+                    5
+                </th>
+                <th>
+                    6
+                </th>
+                <th>
+                    7
+                </th>
+                <th>
+                    8
+                </th>
+                <th>
+                    9
+                </th>
+                <th>
+                    10
+                </th>
+                <th>
+                    11
+                </th>
+                <th>
+                    12
+                </th>
+                <th>
+                    13
+                </th>
+                <th>
+                    14
+                </th>
+                <th>
+                    15
+                </th>
+                <th>
+                    16
+                </th>
+                <th>
+                    17
+                </th>
+                <th>
+                    18
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Out
+                </th>
+                <th>
+                    In
+                </th>
+                <th>
+                    6
+                </th>
+                <th>
+                    3
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var entry in Model.Entries.OrderByDescending(e => e.ScoreCard.TotalPoints)
+                .ThenByDescending(e => e.ScoreCard.InPoints)
+                .ThenByDescending(e => e.ScoreCard.LastSixPoints)
+                .ThenByDescending(e => e.ScoreCard.LastThreePoints))
+            {
+                <tr>
+                    <td>
+                        @entry.ScoreCard.Player.FullName (@entry.ScoreCard.EventHandicap)
+                    </td>
+                    <td>
+                        Gross
+
+                    </td>
+                    @if (entry.ScoreCard.Scores.Count() > 0)
+                    {
+                        @foreach (var score in entry.ScoreCard.Scores.OrderBy(e => e.HoleNumber))
+                        {
+                    <td>
+                        @if (score.Gross == Model.Course.Holes.Where(h => h.Number == score.HoleNumber).Select(h => h.Par).FirstOrDefault())
+                        {
+                            <p class="badge badge-primary">@score.Gross</p>
+                        }
+                        @if (score.Gross < Model.Course.Holes.Where(h => h.Number == score.HoleNumber).Select(h => h.Par).FirstOrDefault())
+                        {
+                            <p class="badge badge-success">@score.Gross</p>
+                        }
+                        @if (score.Gross > Model.Course.Holes.Where(h => h.Number == score.HoleNumber).Select(h => h.Par).FirstOrDefault())
+                        {
+                            <p class="badge badge-danger">@score.Gross</p>
+                        }
+
+
+
+                    </td>
+                        }
+                        <td>
+                            @entry.ScoreCard.TotalGross
+                        </td>
+                        <td>
+                            @entry.ScoreCard.OutGross
+                        </td>
+                        <td>
+                            @entry.ScoreCard.InGross
+                        </td>
+                        <td>
+                            @entry.ScoreCard.LastSixGross
+                        </td>
+                        <td>
+                            @entry.ScoreCard.LastThreeGross
+                        </td>
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    }
+
+                    @*<td>
+                        <a asp-action="Edit" asp-route-id="@entry.Id" asp-controller="Entries">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@entry.Id" asp-controller="Entries">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@entry.Id" asp-controller="Entries">Delete</a>
+                    </td>*@
+                </tr>
+                <tr class="table-borderless">
+                    <td></td>
+                    <td>
+                        Nett
+                    </td>
+                    @if (entry.ScoreCard.Scores.Count() > 0)
+                    {
+                        @foreach (var score in entry.ScoreCard.Scores.OrderBy(e => e.HoleNumber))
+                        {
+                            <td>
+                                @if (score.Nett == Model.Course.Holes.Where(h => h.Number == score.HoleNumber).Select(h => h.Par).FirstOrDefault())
+                                {
+                                    <p class="badge badge-primary">@score.Nett</p>
+                                }
+                                @if (score.Nett < Model.Course.Holes.Where(h => h.Number == score.HoleNumber).Select(h => h.Par).FirstOrDefault())
+                                {
+                                    <p class="badge badge-success">@score.Nett</p>
+                                }
+                                @if (score.Nett > Model.Course.Holes.Where(h => h.Number == score.HoleNumber).Select(h => h.Par).FirstOrDefault())
+                                {
+                                    <p class="badge badge-danger">@score.Nett</p>
+                                }
+
+                            </td>
+                        }
+                        <td>
+                            @entry.ScoreCard.TotalNett
+                        </td>
+                        <td>
+                            @entry.ScoreCard.OutNett
+                        </td>
+                        <td>
+                            @entry.ScoreCard.InNett
+                        </td>
+                        <td>
+                            @entry.ScoreCard.LastSixNett
+                        </td>
+                        <td>
+                            @entry.ScoreCard.LastThreeNett
+                        </td>
+
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    }
+                </tr>
+
+                <tr class="table-borderless">
+                    <td></td>
+                    <td>
+                        Points
+                    </td>
+                    @if (entry.ScoreCard.Scores.Count() > 0)
+                    {
+                        @foreach (var score in entry.ScoreCard.Scores.OrderBy(e => e.HoleNumber))
+                        {
+                            <td>
+                                @if (score.Points == 2)
+                                {
+                                    <p class="badge badge-primary">@score.Points</p>
+                                }
+                                @if (score.Points > 2)
+                                {
+                                    <p class="badge badge-success">@score.Points</p>
+                                }
+                                @if (score.Points < 2)
+                                {
+                                    <p class="badge badge-danger">@score.Points</p>
+                                }
+
+                            </td>
+                        }
+                        <td>
+                            <p class="badge badge-success">@entry.ScoreCard.TotalPoints</p>
+                        </td>
+                        <td>
+                            @entry.ScoreCard.OutPoints
+                        </td>
+                        <td>
+                            @entry.ScoreCard.InPoints
+                        </td>
+                        <td>
+                            @entry.ScoreCard.LastSixPoints
+                        </td>
+                        <td>
+                            @entry.ScoreCard.LastThreePoints
+                        </td>
+
+                    }
+                    else
+                    {
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    }
+                </tr>
+
+
+
+
+            }
+        </tbody>
+
+        </table>
+
+</div>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a> |
+    <a href="~/Events/@Model.Id/Entries/Create">Add Entry</a>
+</div>

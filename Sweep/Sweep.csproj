@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-Sweep-90B6F215-F164-4CE2-88E2-2F4A400DBB0C</UserSecretsId>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptToolsVersion>3.3</TypeScriptToolsVersion>
+    <AssemblyName>GolfSweep</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app\Entry.ts" />
+    <None Remove="ClientApp\app\Event.ts" />
+    <None Remove="ClientApp\app\EventForm.ts" />
+    <None Remove="ClientApp\app\Leaderboard.ts" />
+    <None Remove="ClientApp\app\Player.ts" />
+    <None Remove="ClientApp\app\PlayerEntryForm.ts" />
+    <None Remove="ClientApp\app\Score.ts" />
+    <None Remove="ClientApp\app\ScoreCard.ts" />
+    <None Remove="ClientApp\app\ScrollPositionRestore.ts" />
+    <None Remove="ClientApp\app\Sweep.ts" />
+    <None Remove="ClientApp\app\SweepApproval.ts" />
+    <None Remove="ClientApp\app\SweepForm.ts" />
+    <None Remove="ClientApp\app\UpdateHandicap.ts" />
+    <None Remove="ClientApp\app\UserAuth.ts" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\Entry.ts" />
+    <TypeScriptCompile Include="ClientApp\app\Event.ts" />
+    <TypeScriptCompile Include="ClientApp\app\EventForm.ts" />
+    <TypeScriptCompile Include="ClientApp\app\Leaderboard.ts" />
+    <TypeScriptCompile Include="ClientApp\app\Player.ts" />
+    <TypeScriptCompile Include="ClientApp\app\PlayerEntryForm.ts" />
+    <TypeScriptCompile Include="ClientApp\app\Score.ts" />
+    <TypeScriptCompile Include="ClientApp\app\ScoreCard.ts" />
+    <TypeScriptCompile Include="ClientApp\app\ScrollPositionRestore.ts" />
+    <TypeScriptCompile Include="ClientApp\app\Sweep.ts" />
+    <TypeScriptCompile Include="ClientApp\app\SweepApproval.ts" />
+    <TypeScriptCompile Include="ClientApp\app\SweepForm.ts" />
+    <TypeScriptCompile Include="ClientApp\app\UpdateHandicap.ts" />
+    <TypeScriptCompile Include="ClientApp\app\UserAuth.ts" />
+  </ItemGroup>
+
+  <Target Name="MyPublishScripts" BeforeTargets="BeforePublish">
+    <Exec Command="npm install"></Exec>
+    <Exec Command="ng build"></Exec>
+  </Target>
+
+</Project>

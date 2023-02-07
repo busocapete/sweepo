@@ -1,0 +1,150 @@
+﻿@model IEnumerable<GolfSweep.Data.ScoreCard>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>
+                @Html.DisplayNameFor(model => model.First)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Second)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Third)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fourth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fifth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sixth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seventh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eighth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ninth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tenth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eleventh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Twelwth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Thirteenth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fourteenth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fifteenth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sixteenth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Seventeenth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Eithteenth)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Player)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.First)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Second)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Third)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fourth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fifth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sixth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seventh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eighth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ninth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tenth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eleventh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Twelwth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Thirteenth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fourteenth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fifteenth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sixteenth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Seventeenth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eithteenth)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Player.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

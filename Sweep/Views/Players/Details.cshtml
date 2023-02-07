@@ -1,0 +1,77 @@
+﻿@model  GolfSweep.ViewModels.PlayerDetailsViewModel
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Player</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Player.User)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Player.User.FirstName) @Html.DisplayFor(model => model.Player.User.LastName)
+        </dd>
+    </dl>
+</div>
+
+<div class="row">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Id
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Paid
+                </th>
+                <th>
+                    Scorecard
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Events)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @item.Entries.Where(e => e.ScoreCard.PlayerId == Model.Player.Id).Select(n => n.Paid).FirstOrDefault()
+                </td>
+                <td>
+                    @*@item.Entries.Where(e => e.ScoreCard.PlayerId == Model.Player.Id).Select(n => n.ScoreCard))*@
+                    <a href="~/Players/@Model.Player.Id/ScoreCards/@item.Entries.Where(e => e.ScoreCard.PlayerId == Model.Player.Id).Select(n => n.ScoreCard.Id).FirstOrDefault()">Scorecard</a>
+                </td>
+
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Player.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

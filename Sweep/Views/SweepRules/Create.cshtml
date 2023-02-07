@@ -1,0 +1,61 @@
+﻿@model GolfSweep.Data.SweepRules
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>SweepRules</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CutHandicaps" /> @Html.DisplayNameFor(model => model.CutHandicaps)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="WinnerCut" class="control-label"></label>
+                <input asp-for="WinnerCut" class="form-control" />
+                <span asp-validation-for="WinnerCut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SecondCut" class="control-label"></label>
+                <input asp-for="SecondCut" class="form-control" />
+                <span asp-validation-for="SecondCut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThirdCut" class="control-label"></label>
+                <input asp-for="ThirdCut" class="form-control" />
+                <span asp-validation-for="ThirdCut" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinPointsForCut" class="control-label"></label>
+                <input asp-for="MinPointsForCut" class="form-control" />
+                <span asp-validation-for="MinPointsForCut" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OrderOfMerit" /> @Html.DisplayNameFor(model => model.OrderOfMerit)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="OOMEntriesScale" /> @Html.DisplayNameFor(model => model.OOMEntriesScale)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

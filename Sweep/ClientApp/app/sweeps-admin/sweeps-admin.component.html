@@ -1,0 +1,38 @@
+<div *ngIf="sweeps">
+    <div class="card" *ngFor="let sweep of sweeps">
+        <nav class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <p class="navbar-brand" href="#">{{sweep.name}} <span *ngIf="sweep.userIsMember && sweep.approved" class="badge badge-success">Member</span></p>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/sweep/admin/events/{{sweep.id}}">{{sweep.totalEvents}} Events</a>
+
+                    </li>
+
+                    <!--<li class="nav-item">
+
+                        <a *ngIf="!event.notDrawn" routerLink="/event/play/{{event.id}}" class="nav-link" value="Play">Play</a>
+
+                    </li>-->
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+            <div style="text-align:center">
+                <h6>
+                    Owner: {{sweep.owner}}
+                </h6>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

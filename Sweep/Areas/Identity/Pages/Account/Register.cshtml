@@ -1,0 +1,149 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_LoginLayout";
+}
+
+<h3>SWEEPO</h3>
+
+
+<div class="col-md-4 ml-auto mr-auto">
+    <div class="card card-login card-plain">
+
+
+
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="card-header text-center">
+                @*<div class="logo-container">
+                    <img src="../assets/img/now-logo.png" alt="">
+                </div>*@
+            </div>
+            <div class="card-body">
+                <div class="input-group no-border input-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="now-ui-icons users_circle-08"></i>
+                        </span>
+                    </div>
+                    <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="input-group no-border input-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="now-ui-icons users_circle-08"></i>
+                        </span>
+                    </div>
+                    <input asp-for="Input.FirstName" class="form-control" placeholder="First Name" />
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+                <div class="input-group no-border input-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="now-ui-icons users_circle-08"></i>
+                        </span>
+                    </div>
+                    <input asp-for="Input.LastName" class="form-control" placeholder="Last Name" />
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+
+                <div class="input-group no-border input-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="now-ui-icons users_circle-08"></i>
+                        </span>
+                    </div>
+                    <input asp-for="Input.Exact" class="form-control" placeholder="Exact Handicap" />
+                    <span asp-validation-for="Input.Exact" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="input-group no-border input-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="now-ui-icons text_caps-small"></i>
+                        </span>
+                    </div>
+                    <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="input-group no-border input-lg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="now-ui-icons text_caps-small"></i>
+                        </span>
+                    </div>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-success btn-round btn-lg btn-block">Register</button>
+                <div class="pull-left">
+                    <h6>
+                        <a href="~/Identity/Account/Login" class="link">Login</a>
+                    </h6>
+                </div>
+                @*<div class="pull-right">
+                        <h6>
+                            <a href="#pablo" class="link">Need Help?</a>
+                        </h6>
+                    </div>*@
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@*<h1>@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <h4>Create a new account.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.FirstName"></label>
+                    <input asp-for="Input.FirstName" class="form-control" />
+                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.LastName"></label>
+                    <input asp-for="Input.LastName" class="form-control" />
+                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Exact"></label>
+                    <input asp-for="Input.Exact" class="form-control" />
+                    <span asp-validation-for="Input.Exact" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>*@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

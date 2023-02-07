@@ -1,0 +1,61 @@
+<div *ngIf="events">
+    <div class="card" *ngFor="let event of events">
+        <nav *ngIf="event.inFuture" class="navbar navbar-expand navbar-dark bg-info justify-content-end card-nav">
+            <a class="navbar-brand" href="#"><i class="fas fa-home"></i></a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/event/detail/{{event.id}}"><i class="fa fa-users"></i> {{event.playerNames.length}}</a>
+
+                    </li>
+                    <li class="nav-item" *ngIf="userHasJoined(event)">
+
+                        <a *ngIf="!event.notDrawn" routerLink="/event/play/{{event.id}}" class="nav-link" value="Play">Play</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <button *ngIf="!userHasJoined(event)" (click)="enterEvent(event)" class="btn btn-sm btn-success float-right" value="Join">Join</button>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <nav *ngIf="!event.inFuture" class="navbar navbar-expand navbar-dark bg-danger justify-content-end card-nav">
+            <a class="navbar-brand" href="#"><i class="fas fa-home"></i></a>
+            <div class="navbar-collapse collapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" routerLink="/event/detail/{{event.id}}"><i class="fa fa-users"></i> {{event.playerNames.length}}</a>
+
+                    </li>
+                    <li class="nav-item">
+                        <a routerLink="/event/results/{{event.id}}" class="nav-link" value="Play">Results</a>
+
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+
+        <div class="card-header">
+
+        </div>
+        <div class="card-body">
+
+            <div style="text-align:center">
+                <h6>
+                    Gerry's Cowglen Winter Sweep
+                </h6>
+                <h5>{{event.date | date:short }}</h5>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
